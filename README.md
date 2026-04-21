@@ -30,7 +30,7 @@ binary vectors encoded as ±1 floats.
 | Bob   | ciphertext ‖ key (32-d) | plaintext (16-d, tanh) | Decrypt |
 | Eve   | ciphertext only (16-d) | plaintext guess (16-d) | Attack |
 
-## Training Loop (Phase 2.2)
+## Training Loop (Phase 2)
 
 The alternating adversarial loop per epoch:
 
@@ -41,7 +41,7 @@ The alternating adversarial loop per epoch:
 This incentivises Alice and Bob to develop an encryption scheme that is
 simultaneously decodable by Bob (who has the key) and unintelligible to Eve.
 
-## Hyperparameters (Phase 3.1)
+## Hyperparameters (Phase 3)
 
 Tunable in `train.py`:
 
@@ -53,12 +53,12 @@ Tunable in `train.py`:
 | `LR_AB` | 8e-4 | reduce if Bob unstable |
 | `EVE_STEPS` | 2 | Eve inner updates per step |
 
-## Success Criteria (Phase 4.1)
+## Success Criteria (Phase 4)
 
 - **Bob bit accuracy ≥ 95%** on 1,000 unseen messages
 - **Eve bit accuracy ≈ 50%** (random baseline)
 
-## Output Plots (Phase 4.3)
+## Output Plots (Phase 4)
 
 | File | Description |
 |------|-------------|
