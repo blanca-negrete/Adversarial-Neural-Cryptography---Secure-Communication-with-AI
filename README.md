@@ -19,22 +19,6 @@ neural_crypto/
 └── plots/             output figures (PNG)
 ```
 
-## Quick Start
-
-```bash
-# 1. Install dependencies
-pip install tensorflow numpy matplotlib
-
-# 2. Run everything end-to-end
-python run_all.py
-
-# Or run each phase individually:
-python generate_data.py   # Phase 1.2
-python models.py          # Phase 1.3  (architecture summary)
-python train.py           # Phase 2 & 3
-python evaluate.py        # Phase 4
-```
-
 ## Architecture
 
 All three models use a **Dense → Reshape → Conv1D** pipeline operating on 16-bit
