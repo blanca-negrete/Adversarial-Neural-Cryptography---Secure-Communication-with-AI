@@ -40,6 +40,9 @@ def evaluate(alice, bob, eve):
     test_msgs = np.load(os.path.join(DATA_DIR, "test_messages.npy"))
     test_keys = np.load(os.path.join(DATA_DIR, "test_keys.npy"))
 
+    test_msgs = tf.convert_to_tensor(test_msgs, dtype=tf.float32)
+    test_keys = tf.convert_to_tensor(test_keys, dtype=tf.float32)
+
     cipher    = alice([test_msgs, test_keys], training=False)
     bob_guess = bob([cipher, test_keys],      training=False)
     eve_guess = eve(cipher,                   training=False)
@@ -69,7 +72,10 @@ def demo(alice, bob, eve, n_examples: int = 5):
     msgs = (rng.integers(0, 2, (n_examples, MSG_BITS)).astype(np.float32) * 2 - 1)
     keys = (rng.integers(0, 2, (n_examples, KEY_BITS)).astype(np.float32) * 2 - 1)
 
-    cipher    = alice([msgs, keys], training=False).numpy()
+    msgs = tf.convert_to_tensor(msgs, dtype=tf.float32)
+    keys = tf.convert_to_tensor(keys, dtype=tf.float32)
+
+    cipher    = alice([msgs, keys], training=False)
     bob_out   = bob([cipher, keys], training=False).numpy()
     eve_out   = eve(cipher,         training=False).numpy()
 
@@ -80,7 +86,7 @@ def demo(alice, bob, eve, n_examples: int = 5):
     print("  DEMO: Alice encrypts — Bob decrypts — Eve guesses")
     print("════════════════════════════════════════════════════════════════════")
     for i in range(n_examples):
-        orig  = to_bits(msgs[i])
+        orig  = to_bits(msgs[i].numpy())
         bdec  = to_bits(bob_out[i])
         edec  = to_bits(eve_out[i])
         match_bob = np.sum(orig == bdec)

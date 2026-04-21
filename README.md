@@ -1,4 +1,4 @@
-# Adversarial-Neural-Cryptography - Blanca Negrte & Molly Corgan
+# Adversarial-Neural-Cryptography - Blanca Negrete & Molly Corgan
 ## Neural Cryptography — Adversarial AI Encryption
 
 Three neural networks compete in an arms race: **Alice** encrypts, **Bob** decrypts,
