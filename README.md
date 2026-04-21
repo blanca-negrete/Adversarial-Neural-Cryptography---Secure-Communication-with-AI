@@ -21,8 +21,7 @@ neural_crypto/
 
 ## Architecture
 
-All three models use a **Dense → Reshape → Conv1D** pipeline operating on 16-bit
-binary vectors encoded as ±1 floats.
+All models operate on **16-bit binary vectors encoded as ±1 floats** and use a Dense → Reshape → Conv1D pipeline.
 
 | Model | Input | Output | Role |
 |-------|-------|--------|------|
@@ -34,9 +33,9 @@ binary vectors encoded as ±1 floats.
 
 The alternating adversarial loop per epoch:
 
-1. **Train Eve** — minimise MSE between her guess and the true plaintext.
-2. **Freeze Eve, train Alice+Bob** — minimise Bob's reconstruction error
-   *plus* a penalty when Eve's loss drops below the random-guess baseline.
+1. **Train Eve** — Minimizes reconstruction error (MSE) between predicted and true plaintext
+2. **Freeze Eve, train Alice+Bob** — Minimizes Bob reconstruction loss
+  - Adds pressure to reduce Eve’s ability to decode ciphertext
 
 This incentivises Alice and Bob to develop an encryption scheme that is
 simultaneously decodable by Bob (who has the key) and unintelligible to Eve.
@@ -66,6 +65,26 @@ Tunable in `train.py`:
 | `plots/final_accuracy_bar.png` | Bar chart — final Bob vs Eve accuracy |
 | `plots/per_bit_accuracy.png` | Per-bit accuracy across all 16 positions |
 | `plots/history_summary.png` | Validation accuracy dynamics |
+
+## Training Results Summary
+
+### Bob vs Eve over time
+
+- Bob accuracy rapidly increases and stabilizes around **~99%**
+- Eve accuracy starts near random (~50–55%) and stabilizes around **~58–60%**
+
+### Key insight
+
+- Bob successfully learns to decrypt with near-perfect accuracy
+- Eve improves but does not reach full random equilibrium (50%)
+- The system reaches a **stable adversarial balance**, not perfect cryptographic security
+
+## Adversarial Training Insights
+
+- Alice and Bob learn a shared encoding scheme that hides structure from Eve
+- Eve extracts partial statistical information but cannot fully decode messages
+- Training converges to a **competitive equilibrium**
+- Ciphertext still contains some exploitable patterns (Eve > 50%)
 
 ## Limitations
 
