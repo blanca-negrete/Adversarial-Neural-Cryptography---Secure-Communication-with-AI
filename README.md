@@ -69,10 +69,4 @@ Tunable in `train.py`:
 
 ## Limitations
 
-- The encryption is **not cryptographically proven secure** — it is an
-  emergent, learned cipher with no formal security guarantees.
-- Performance depends heavily on random seed and training duration.
-- Eve can sometimes converge on a partial solution if given enough capacity
-  or training steps — counter by increasing Alice/Bob network depth.
-- 16-bit messages are a toy setting; real applications would require much
-  longer keys and messages with proper threat modelling.
+When using AI generated encryption there can be several limitations to the program. The AI models often prioritze code functionality over safe and secure code. When prioritizing code functionality it can lead to a number of vulnerabilites that put your security at risk. Another limitation of AI generated encryption is it is non-deterministic. Building off of the lack of security, the AI can produce the code that works for testing purposes but the functionallity of real world often is insecure. Lastly, data privacy can be a concern. In real scenarios of companys using the AI tools to generate encryption code any company information will be stored as AI training methods. If there were to ever be a leak in the system your company data that was imputed could be at risk for exposure.
